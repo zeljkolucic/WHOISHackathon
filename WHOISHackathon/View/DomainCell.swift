@@ -11,7 +11,7 @@ class DomainCell: UITableViewCell {
     
     var title: UILabel = {
         let title = UILabel()
-        title.font = UIFont.boldSystemFont(ofSize: 20)
+        title.font = UIFont(name: Fonts.mainFontBold, size: 20)
         title.textColor = UIColor(named: "AppBlue")
         title.numberOfLines = 0
         title.translatesAutoresizingMaskIntoConstraints = false
@@ -20,7 +20,7 @@ class DomainCell: UITableViewCell {
     
     var info: UILabel = {
         let date = UILabel()
-        date.font = UIFont.systemFont(ofSize: 16)
+        date.font = UIFont(name: Fonts.mainFont, size: 16)
         date.textColor = UIColor(named: "AppBlue")
         date.translatesAutoresizingMaskIntoConstraints = false
         return date

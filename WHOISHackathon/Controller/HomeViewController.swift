@@ -45,6 +45,7 @@ class HomeViewController: UIViewController {
     private let searchButton: UIButton = {
         let button = UIButton()
         button.setTitle(Strings.searchBarPlaceholder, for: .normal)
+        button.titleLabel?.font = UIFont(name: Fonts.mainFont, size: 18)
         button.layer.cornerRadius = 10
         button.backgroundColor = UIColor(named: "AppLightGreen")
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -119,7 +120,7 @@ class HomeViewController: UIViewController {
         
         inputField.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 40).isActive = true
         inputField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
-        inputField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -90).isActive = true
+        inputField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -100).isActive = true
         inputField.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         searchButton.topAnchor.constraint(equalTo: inputField.topAnchor).isActive = true
@@ -204,6 +205,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MostFrequentCell", for: indexPath)
+        cell.textLabel?.font = UIFont(name: Fonts.mainFont, size: 18)
         cell.textLabel?.textColor = UIColor(named: "AppBlue")
         if let mostSearchedDomains = sharedNetworkManager.mostSearchedDomains {
             cell.textLabel?.text = mostSearchedDomains[indexPath.row].name

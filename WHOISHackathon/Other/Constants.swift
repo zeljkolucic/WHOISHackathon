@@ -46,6 +46,7 @@ struct Notifications {
 struct Fonts {
     
     static let mainFont = "Montserrat-Regular"
+    static let mainFontBold = "Montserrat-SemiBold"
     
 }
 

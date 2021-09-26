@@ -21,18 +21,13 @@ class HistoryViewController: UIViewController {
         return view
     }()
     
-    private let headlineLabel: UILabel = {
-        let label = UILabel()
-        label.text = Strings.historySearch
-        label.textColor = .white
-        return label
-    }()
-    
-    private let bottomContainerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(named: "AppTheme")
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    private let viewControllerTitle: UILabel = {
+        let title = UILabel()
+        title.textColor = .white
+        title.font = UIFont(name: Fonts.mainFont, size: 28)
+        title.text = Strings.history
+        title.translatesAutoresizingMaskIntoConstraints = false
+        return title
     }()
     
     private let tableView: UITableView = {
@@ -60,38 +55,23 @@ class HistoryViewController: UIViewController {
         view.backgroundColor = .white
         
         view.addSubview(tableView)
-        
-       // configureBottomContainerView()
+        view.addSubview(topContainerView)
+        topContainerView.addSubview(viewControllerTitle)
     }
     
     private func setConstraints() {
-//        topContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-//        topContainerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-//        topContainerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 120).isActive = true
-//        topContainerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        topContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        topContainerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        topContainerView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        topContainerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+
+        viewControllerTitle.centerYAnchor.constraint(equalTo: topContainerView.centerYAnchor).isActive = true
+        viewControllerTitle.centerXAnchor.constraint(equalTo: topContainerView.centerXAnchor).isActive = true
         
-//        headlineLabel.centerYAnchor.constraint(equalTo: topContainerView.centerYAnchor).isActive = true
-//        headlineLabel.leadingAnchor.constraint(equalTo: topContainerView.leadingAnchor).isActive = true
-//        headlineLabel.trailingAnchor.constraint(equalTo: topContainerView.trailingAnchor).isActive = true
-        
-//        bottomContainerView.topAnchor.constraint(equalTo: topContainerView.bottomAnchor).isActive = true
-//        bottomContainerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-//        bottomContainerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-//        bottomContainerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        
-        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tableView.topAnchor.constraint(equalTo: topContainerView.bottomAnchor, constant: 10).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-    }
-    
-    private func configureBottomContainerView() {
-        let path = UIBezierPath(roundedRect: bottomContainerView.bounds,
-                                byRoundingCorners:[.topLeft, .topRight],
-                                cornerRadii: CGSize(width: 20, height:  20))
-        let maskLayer = CAShapeLayer()
-        maskLayer.path = path.cgPath
-        bottomContainerView.layer.mask = maskLayer
     }
     
     private func fetchItems() {

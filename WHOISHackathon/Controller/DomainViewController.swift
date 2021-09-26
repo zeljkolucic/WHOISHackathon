@@ -10,12 +10,36 @@ import UserNotifications
 
 class DomainViewController: UIViewController {
     
+    private let topContainerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(named: "AppBlue")
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let viewControllerTitle: UILabel = {
+        let title = UILabel()
+        title.textColor = .white
+        title.font = UIFont(name: Fonts.mainFont, size: 28)
+        title.text = Strings.history
+        title.translatesAutoresizingMaskIntoConstraints = false
+        return title
+    }()
+    
     private let favoritesButton: FavoritesButton = {
         let button = FavoritesButton()
         let image = UIImage(systemName: "star")
+        button.tintColor = .white
         button.setBackgroundImage(image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+    private let imageView: UIImageView = {
+        let imageView = UIImageView()
+        let image = UIImage(named: "CheckImage")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
     
     private let domainName: UILabel = {
@@ -109,6 +133,7 @@ class DomainViewController: UIViewController {
             mainButton.setTitle(Strings.notifyWhenAvailable, for: .normal)
         } else {
             expirationDateLabel.text = "\(Strings.available)"
+            view.addSubview(imageView)
             mainButton.setTitle(Strings.buyDomain, for: .normal)
         }
         
@@ -131,26 +156,36 @@ class DomainViewController: UIViewController {
     
     private func setupLayout() {
         view.backgroundColor = .white
-        view.addSubview(favoritesButton)
-        view.addSubview(domainName)
         view.addSubview(createdDateLabel)
         view.addSubview(expirationDateLabel)
         view.addSubview(responseTextView)
         view.addSubview(mainButton)
         
+        view.addSubview(topContainerView)
+        topContainerView.addSubview(viewControllerTitle)
+        topContainerView.addSubview(favoritesButton)
+        
         if let domainDetail = domainDetail {
-            domainName.text = domainDetail.name
+            viewControllerTitle.text = domainDetail.name
         }
     }
     
     private func setConstraints() {
-        favoritesButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        favoritesButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
+        topContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        topContainerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        topContainerView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        topContainerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+
+        viewControllerTitle.centerYAnchor.constraint(equalTo: topContainerView.centerYAnchor).isActive = true
+        viewControllerTitle.centerXAnchor.constraint(equalTo: topContainerView.centerXAnchor).isActive = true
         
-        domainName.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        domainName.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
+        favoritesButton.topAnchor.constraint(equalTo: topContainerView.topAnchor, constant: 20).isActive = true
+        favoritesButton.trailingAnchor.constraint(equalTo: topContainerView.trailingAnchor, constant: -20).isActive = true
         
-        createdDateLabel.topAnchor.constraint(equalTo: domainName.bottomAnchor, constant: 20).isActive = true
+        imageView.topAnchor.constraint(equalTo: topContainerView.bottomAnchor, constant: 50).isActive = true
+        imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        createdDateLabel.topAnchor.constraint(equalTo: topContainerView.bottomAnchor, constant: 20).isActive = true
         createdDateLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
         createdDateLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant:  -20).isActive = true
         

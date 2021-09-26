@@ -11,7 +11,7 @@ class FavoritesViewController: UIViewController {
     
     private let tableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(DomainCell.self, forCellReuseIdentifier: "FavoriteDomainCell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "FavoriteDomainCell")
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -26,7 +26,9 @@ class FavoritesViewController: UIViewController {
     private let viewControllerTitle: UILabel = {
         let title = UILabel()
         title.textColor = .white
+        title.font = UIFont(name: Fonts.mainFont, size: 28)
         title.text = Strings.favorites
+        title.translatesAutoresizingMaskIntoConstraints = false
         return title
     }()
     
@@ -93,20 +95,10 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteDomainCell", for: indexPath) as! DomainCell
-        cell.title.text = favorites[indexPath.row].name
-    
-        
-        let expirationDate = favorites[indexPath.row].expirationDateInMiliseconds
-        let result = Double("0.")
-        if expirationDate != result {
-            let date = Date(timeIntervalSince1970: expirationDate / 1000.0)
-            let dateString = DateFormatter.toString(date: date)
-            cell.info.text = "Domen ističe \(dateString)"
-        } else {
-            cell.info.text = "Domen je dostupan"
-        }
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteDomainCell", for: indexPath)
+        cell.textLabel?.text = favorites[indexPath.row].name
+        cell.textLabel?.textColor = UIColor(named: "AppBlue")
+        cell.textLabel?.font = UIFont(name: Fonts.mainFont, size: 18)
         return cell
     }
     

@@ -33,6 +33,7 @@
 		E4C922962700B9A400A18FD2 /* DomainItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C922952700B9A400A18FD2 /* DomainItem+CoreDataProperties.swift */; };
 		E4C922992700C1C100A18FD2 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4C922982700C16100A18FD2 /* Montserrat-Regular.ttf */; };
 		E4C9229B2700DF2600A18FD2 /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C9229A2700DF2600A18FD2 /* SearchField.swift */; };
+		E4C9229F270120AE00A18FD2 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4C9229E270120AE00A18FD2 /* Montserrat-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		E4C922952700B9A400A18FD2 /* DomainItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DomainItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E4C922982700C16100A18FD2 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		E4C9229A2700DF2600A18FD2 /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
+		E4C9229E270120AE00A18FD2 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +196,7 @@
 		E4C922972700C12000A18FD2 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				E4C9229E270120AE00A18FD2 /* Montserrat-SemiBold.ttf */,
 				E4C922982700C16100A18FD2 /* Montserrat-Regular.ttf */,
 			);
 			path = Fonts;
@@ -258,6 +261,7 @@
 			files = (
 				E4C922992700C1C100A18FD2 /* Montserrat-Regular.ttf in Resources */,
 				E4C9225326FFB0B000A18FD2 /* LaunchScreen.storyboard in Resources */,
+				E4C9229F270120AE00A18FD2 /* Montserrat-SemiBold.ttf in Resources */,
 				E4C9225026FFB0B000A18FD2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
