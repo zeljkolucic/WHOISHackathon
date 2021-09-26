@@ -62,9 +62,13 @@ extension SceneDelegate {
     private func setupScreens() {
         let tabBarController = UITabBarController()
         
-        let homeViewController = UINavigationController(rootViewController: HomeViewController())
-        let favoritesViewController = UINavigationController(rootViewController: FavoritesViewController())
-        let historyViewController = UINavigationController(rootViewController: HistoryViewController())
+//        let homeViewController = UINavigationController(rootViewController: HomeViewController())
+//        let favoritesViewController = UINavigationController(rootViewController: FavoritesViewController())
+//        let historyViewController = UINavigationController(rootViewController: HistoryViewController())
+        
+        let homeViewController = HomeViewController()
+        let favoritesViewController = FavoritesViewController()
+        let historyViewController = HistoryViewController()
         
         homeViewController.title = Strings.home
         favoritesViewController.title = Strings.favorites

@@ -1,13 +1,13 @@
 //
-//  SearchResultCell.swift
+//  DomainCell.swift
 //  WHOISHackathon
 //
-//  Created by Zeljko Lucic on 25.9.21..
+//  Created by Zeljko Lucic on 26.9.21..
 //
 
 import UIKit
 
-class SearchResultCell: UITableViewCell {
+class DomainCell: UITableViewCell {
     
     var title: UILabel = {
         let title = UILabel()
@@ -18,7 +18,7 @@ class SearchResultCell: UITableViewCell {
         return title
     }()
     
-    var date: UILabel = {
+    var info: UILabel = {
         let date = UILabel()
         date.font = UIFont.systemFont(ofSize: 16)
         date.textColor = UIColor(named: "AppBlue")
@@ -46,7 +46,7 @@ class SearchResultCell: UITableViewCell {
     
     private func setupLayout() {
         addSubview(title)
-        addSubview(date)
+        addSubview(info)
         addSubview(icon)
     }
     
@@ -57,9 +57,9 @@ class SearchResultCell: UITableViewCell {
         title.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12).isActive = true
         title.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12).isActive = true
         
-        date.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 5).isActive = true
-        date.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12).isActive = true
-        date.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12).isActive = true
+        info.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 5).isActive = true
+        info.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12).isActive = true
+        info.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12).isActive = true
         
         
         icon.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true

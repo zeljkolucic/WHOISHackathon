@@ -11,7 +11,7 @@ class SearchResultViewController: UIViewController {
     
     private var searchResults = [SearchResult]()
     
-    private let tableView: UITableView = {
+    let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "SearchResultCell")
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -24,8 +24,8 @@ class SearchResultViewController: UIViewController {
         setupLayout()
         setConstraints()
         
-        tableView.delegate = self
         tableView.dataSource = self
+        tableView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,6 +34,7 @@ class SearchResultViewController: UIViewController {
     
     private func setupLayout() {
         view.addSubview(tableView)
+        tableView.separatorStyle = .none
     }
     
     private func setConstraints() {
@@ -44,13 +45,23 @@ class SearchResultViewController: UIViewController {
     }
     
     private func fetchItems() {
-        searchResults = sharedSearchResultManager.fetchItems()
+        sharedSearchResultManager.fetchItems()
+        searchResults = sharedSearchResultManager.searchResults
         tableView.reloadData()
+    }
+    
+    @objc private func navigateToDomain() {
+        DispatchQueue.main.async {
+            if let domainDetail = sharedNetworkManager.domainData {
+                //self.navigationController?.pushViewController(DomainViewController(domainDetail), animated: true)
+                self.present(DomainViewController(domainDetail), animated: true, completion: nil)
+            }
+        }
     }
     
 }
 
-extension SearchResultViewController: UITableViewDelegate, UITableViewDataSource {
+extension SearchResultViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchResults.count
@@ -64,7 +75,13 @@ extension SearchResultViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+        if let searchValue = searchResults[indexPath.row].searchValue {
+            sharedSearchResultManager.insertItem(value: searchValue)
+            sharedNetworkManager.fetchDomainItems(domainName: searchValue)
+            
+            let name = Notification.Name(rawValue: Notifications.notificationKey)
+            NotificationCenter.default.addObserver(self, selector: #selector(navigateToDomain), name: name, object: nil)
+        }
     }
     
 }

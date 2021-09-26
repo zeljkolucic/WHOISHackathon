@@ -7,19 +7,13 @@
 
 import Foundation
 
-class DomainItem: Codable {
-    
-    var information: Information?
-    
-}
-
-class Information: Codable {
+class DomainDetail: Codable {
     
     var name: String?
     var domainId: String?
-    var createdDate: String?
-    var updatedDate: String?
-    var expirationDate: String?
+    var createdDateInMiliseconds: Double?
+    var updatedDateInMiliseconds: Double?
+    var expirationDateInMiliseconds: Double?
     var nameServers: String?
     var address: String?
     var postalCode: String?
@@ -32,3 +26,4 @@ class Information: Codable {
     var whoIsResponse: String?
     
 }
+

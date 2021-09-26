@@ -13,15 +13,43 @@ class NetworkManager {
     
     private let url = "http://hakaton.redtech.cc/WhoIs/"
     
-    let plistURL: URL = {
-        let document = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        return document.appendingPathComponent("DomainItems.plist")
-    }()
+    var domainData: DomainDetail?
+    var mostSearchedDomains: [DomainDetail]?
     
     func fetchDomainItems(domainName: String) {
-        print(domainName)
         let urlString = "\(url)?domain=\(domainName)"
         performRequest(urlString: urlString)
+    }
+    
+    func randomDomain() {
+        let urlString = "\(url)random"
+        performRequest(urlString: urlString)
+    }
+    
+    func getMostSearchedDomains() {
+        let urlString = "\(url)popular"
+        if let url = URL(string: urlString) {
+            let session = URLSession(configuration: .default)
+            let task = session.dataTask(with: url) { (data, response, error) in
+                if error != nil {
+                    print(error!)
+                    return
+                }
+                
+                if let data = data {
+                    let decoder = JSONDecoder()
+                    do {
+                        self.mostSearchedDomains = try decoder.decode([DomainDetail].self, from: data)
+                        let name = Notification.Name.init(Notifications.mostSearchedNotificationKey)
+                        NotificationCenter.default.post(name: name, object: nil)
+                    } catch {
+                        print("Error fetching data from server, \(error)")
+                    }
+                    
+                }
+            }
+            task.resume()
+        }
     }
     
     func performRequest(urlString: String) {
@@ -34,23 +62,36 @@ class NetworkManager {
                 }
                 
                 if let data = data {
-                    let dataString = String(data: data, encoding: .utf8)
-                    print(dataString)
-                    self.parseJSON(data: data)
+                    let decoder = JSONDecoder()
+                    do {
+                        self.domainData = try decoder.decode(DomainDetail.self, from: data)
+                        let name = Notification.Name.init(Notifications.notificationKey)
+                        NotificationCenter.default.post(name: name, object: nil)
+                    } catch {
+                        print("Error fetching data from server, \(error)")
+                    }
+                    
                 }
             }
             task.resume()
         }
     }
     
-    func parseJSON(data: Data) {
-        let decoder = JSONDecoder()
-        do {
-            let decodedData = try decoder.decode(DomainItem.self, from: data)
-        } catch {
-            print(error)
-        }
+    func sendEmailRequest(emailAddress: String, domainName: String) {
+        var urlString = "\(url)email/"
+        urlString.append("?email=\(emailAddress)")
+        urlString.append("&domainname=\(domainName)")
         
+        if let url = URL(string: urlString) {
+            let session = URLSession(configuration: .default)
+            let task = session.dataTask(with: url) { (data, response, error) in
+                if error != nil {
+                    print(error!)
+                    return
+                }
+            }
+            task.resume()
+        }
     }
     
 }

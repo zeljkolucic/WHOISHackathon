@@ -18,6 +18,7 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         
         searchController.searchBar.delegate = self
+        searchController.searchBar.placeholder = "Pretrazite.."
         
         setupLayout()
     }
@@ -27,23 +28,13 @@ class SearchViewController: UIViewController {
         navigationItem.searchController = searchController
     }
     
-    private func insertItem(value: String) {
-        let searchResults = sharedSearchResultManager.fetchItems()
-        var exists = false
-        for i in 0..<searchResults.count {
-            if searchResults[i].searchValue == value {
-                sharedSearchResultManager.updateItem(searchResult: searchResults[i])
-                exists = true
-                break
+    @objc private func navigateToDomain() {
+        DispatchQueue.main.async {
+            if let domainDetail = sharedNetworkManager.domainData {
+                self.navigationController?.pushViewController(DomainViewController(domainDetail), animated: true)
             }
         }
-        
-        if !exists {
-            sharedSearchResultManager.insertItem(value: value)
-        }
     }
-    
-    
     
 }
 
@@ -55,13 +46,12 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchValue = searchBar.text {
-            insertItem(value: searchValue)
+            sharedSearchResultManager.insertItem(value: searchValue)
             sharedNetworkManager.fetchDomainItems(domainName: searchValue)
+            
+            let name = Notification.Name(rawValue: Notifications.notificationKey)
+            NotificationCenter.default.addObserver(self, selector: #selector(navigateToDomain), name: name, object: nil)
         }
-        
-        
-//        navigationController?.pushViewController(DomainViewController(), animated: true)
     }
     
 }
-

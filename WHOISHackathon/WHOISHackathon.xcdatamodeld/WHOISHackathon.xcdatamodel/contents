@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20E241" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="DomainItem" representedClassName=".DomainItem" syncable="YES">
+        <attribute name="abuseContactEmail" optional="YES" attributeType="String"/>
+        <attribute name="abuseContactPhone" optional="YES" attributeType="String"/>
+        <attribute name="address" optional="YES" attributeType="String"/>
+        <attribute name="createdDateInMiliseconds" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="domainId" optional="YES" attributeType="String"/>
+        <attribute name="expirationDateInMiliseconds" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="information" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="nameServers" optional="YES" attributeType="String"/>
+        <attribute name="postalCode" optional="YES" attributeType="String"/>
+        <attribute name="registarIanaId" optional="YES" attributeType="String"/>
+        <attribute name="registarName" optional="YES" attributeType="String"/>
+        <attribute name="registrantName" optional="YES" attributeType="String"/>
+        <attribute name="updatedDateInMiliseconds" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+        <attribute name="whoIsResponse" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="SearchResult" representedClassName=".SearchResult" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="searchValue" optional="YES" attributeType="String"/>
     </entity>
     <elements>
         <element name="SearchResult" positionX="-54" positionY="-9" width="128" height="59"/>
+        <element name="DomainItem" positionX="-36" positionY="27" width="128" height="269"/>
     </elements>
 </model>
