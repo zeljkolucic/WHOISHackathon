@@ -16,7 +16,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        window?.windowScene = windowScene
+        setupScreens()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -53,3 +57,33 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+extension SceneDelegate {
+    
+    private func setupScreens() {
+        let tabBarController = UITabBarController()
+        
+        let homeViewController = UINavigationController(rootViewController: HomeViewController())
+        let favoritesViewController = UINavigationController(rootViewController: FavoritesViewController())
+        let historyViewController = UINavigationController(rootViewController: HistoryViewController())
+        
+        homeViewController.title = Strings.home
+        favoritesViewController.title = Strings.favorites
+        historyViewController.title = Strings.history
+
+        tabBarController.setViewControllers([homeViewController, favoritesViewController, historyViewController], animated: false)
+        
+        let icons = [Images.homeIcon, Images.favoritesIcon, Images.historyIcon]
+        
+        guard let items = tabBarController.tabBar.items else {
+            fatalError()
+        }
+        
+        for i in 0..<items.count {
+            items[i].image = UIImage(systemName: icons[i])
+        }
+        
+        window?.rootViewController = tabBarController
+        window?.makeKeyAndVisible()
+    }
+    
+}
