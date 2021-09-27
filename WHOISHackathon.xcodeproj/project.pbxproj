@@ -34,7 +34,6 @@
 		E4C922992700C1C100A18FD2 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4C922982700C16100A18FD2 /* Montserrat-Regular.ttf */; };
 		E4C9229B2700DF2600A18FD2 /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C9229A2700DF2600A18FD2 /* SearchField.swift */; };
 		E4C9229F270120AE00A18FD2 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4C9229E270120AE00A18FD2 /* Montserrat-SemiBold.ttf */; };
-		E4C922A12701241100A18FD2 /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = E4C922A02701241100A18FD2 /* AppIcon.appiconset */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,7 +66,6 @@
 		E4C922982700C16100A18FD2 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		E4C9229A2700DF2600A18FD2 /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
 		E4C9229E270120AE00A18FD2 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
-		E4C922A02701241100A18FD2 /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppIcon.appiconset; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,7 +124,6 @@
 		E4C9225B26FFB10600A18FD2 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				E4C922A02701241100A18FD2 /* AppIcon.appiconset */,
 				E4C9224F26FFB0B000A18FD2 /* Assets.xcassets */,
 			);
 			path = Assets;
@@ -265,7 +262,6 @@
 				E4C922992700C1C100A18FD2 /* Montserrat-Regular.ttf in Resources */,
 				E4C9225326FFB0B000A18FD2 /* LaunchScreen.storyboard in Resources */,
 				E4C9229F270120AE00A18FD2 /* Montserrat-SemiBold.ttf in Resources */,
-				E4C922A12701241100A18FD2 /* AppIcon.appiconset in Resources */,
 				E4C9225026FFB0B000A18FD2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

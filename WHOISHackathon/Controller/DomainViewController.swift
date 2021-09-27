@@ -182,9 +182,6 @@ class DomainViewController: UIViewController {
         favoritesButton.topAnchor.constraint(equalTo: topContainerView.topAnchor, constant: 20).isActive = true
         favoritesButton.trailingAnchor.constraint(equalTo: topContainerView.trailingAnchor, constant: -20).isActive = true
         
-        imageView.topAnchor.constraint(equalTo: topContainerView.bottomAnchor, constant: 50).isActive = true
-        imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        
         createdDateLabel.topAnchor.constraint(equalTo: topContainerView.bottomAnchor, constant: 20).isActive = true
         createdDateLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
         createdDateLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant:  -20).isActive = true
@@ -233,9 +230,18 @@ class DomainViewController: UIViewController {
                     content.title = "Domen \(String(describing: self.domainDetail?.name)) je istekao."
                     content.body = Strings.domainAvailable
                     
-                    let dateComp = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: Date() + 10)
+                    let date = Date() + 10
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd"
+                    let str = dateFormatter.string(from: date)
+                    print(str)
+                    dateFormatter.timeZone = TimeZone(abbreviation: "EST")
+                    print(str)
                     
-                    let trigger = UNCalendarNotificationTrigger(dateMatching: dateComp, repeats: false)
+                    print(Calendar.current.timeZone)
+                    let dateComp = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
+                    
+                    let trigger = UNCalendarNotificationTrigger(dateMatching: dateComp, repeats: true)
                     let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
                     
                     self.notificationCenter.add(request) { error in
@@ -245,7 +251,6 @@ class DomainViewController: UIViewController {
                         }
                     }
                     
-                    let date = Date() + 10
                     let ac = UIAlertController(title: "Notifikacija zakazana", message: "U \(date)", preferredStyle: .alert)
                     ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                     self.present(ac, animated: true)
@@ -262,7 +267,11 @@ class DomainViewController: UIViewController {
             textField.placeholder = "abc@gmail.com"
         }
         let saveAction = UIAlertAction(title: "Posalji", style: .default, handler: { alert -> Void in
-            sharedNetworkManager.sendEmailRequest(emailAddress: ac.textFields![0].text!, domainName: self.domainName.text!)
+            if let text = self.domainName.text {
+                if let email = ac.textFields?[0].text {
+                    sharedNetworkManager.sendEmailRequest(emailAddress: email, domainName: text)
+                }
+            }
         })
         ac.addAction(saveAction)
         ac.addAction(UIAlertAction(title: "Odustani", style: .destructive, handler: nil))
